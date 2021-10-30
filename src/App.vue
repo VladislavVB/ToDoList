@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="content-body">
-      <div
-        v-for="item in listItems"
-        :key="item"
-        class="content-body-item"
-      >
+      <div v-for="item in listItems" :key="item" class="content-body-item">
         <p>{{ item.title }}</p>
         <div @click="itemDelite(item)" class="close">✖</div>
       </div>
@@ -17,7 +13,9 @@
         type="text"
         placeholder="text"
       />
-      <button @click="addItem()">Add</button>
+      <button :class="listItemName != '' ? '' : 'deactive'" @click="addItem()">
+        Add
+      </button>
     </div>
   </div>
 </template>
@@ -27,7 +25,7 @@ export default {
   name: "App",
   data() {
     return {
-      listItemName: "default",
+      listItemName: "",
       listItems: [
         { title: "text1" },
         { title: "text2" },
@@ -40,13 +38,13 @@ export default {
   methods: {
     addItem() {
       const newItem = {
-        title: this.listItemName
+        title: this.listItemName,
       };
-      this.listItems.push(newItem)
-      this.listItemName = null;
+      this.listItems.push(newItem);
+      this.listItemName = "";
     },
     itemDelite(index) {
-      this.listItems = this.listItems.filter(item => item != index)
+      this.listItems = this.listItems.filter((item) => item != index);
     },
   },
 };
@@ -106,6 +104,10 @@ body {
       border-radius: 10px;
       padding: 0px 10px;
       cursor: pointer;
+      &.deactive {
+        pointer-events: none;
+        opacity: 0.5;
+      }
     }
   }
 }
