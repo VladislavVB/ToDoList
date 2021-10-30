@@ -1,20 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="content-body">
+    <div class="content-body-item"><p>ntrcnfvdfv fd d</p><div class="close">✖</div></div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
 };
 </script>
 
-<style>
+<style lang="scss">
 body {
   margin: 0;
   padding: 0;
@@ -30,5 +26,14 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #313131;
+  color: #fff;
+}
+.content {
+  &-body {
+    &-item {
+      display: flex;
+
+    }
+  }
 }
 </style>
