@@ -2,8 +2,18 @@
   <div>
     <div class="content-body">
       <div v-for="item in listItems" :key="item" class="content-body-item">
-        <p>{{ item.title }}</p>
-        <div @click="itemDelite(item)" class="close">✖</div>
+        <p v-if="item.edit === false">{{ item.title }}</p>
+        <div v-else>
+          <input type="text" v-model="item.title" /><span
+            class="save"
+            @click="editItem(item)"
+            >save</span
+          >
+        </div>
+        <span @click="item.edit = true" class="editor"
+          ><img src="@/assets/edit.png" alt=""
+        /></span>
+        <span @click="itemDelite(item)" class="close">✖</span>
       </div>
     </div>
     <div class="content-add">
@@ -26,25 +36,26 @@ export default {
   data() {
     return {
       listItemName: "",
-      listItems: [
-        { title: "text1" },
-        { title: "text2" },
-        { title: "text3" },
-        { title: "text4" },
-        { title: "text5" },
-      ],
+      ItemEdit: "",
+      listItems: [{ title: "text1", edit: false }],
     };
   },
   methods: {
     addItem() {
       const newItem = {
         title: this.listItemName,
+        edit: false,
       };
       this.listItems.push(newItem);
       this.listItemName = "";
     },
     itemDelite(index) {
       this.listItems = this.listItems.filter((item) => item != index);
+    },
+    editItem(elem) {
+      console.log(elem);
+      elem.edit = false;
+      this.ItemEdit = "";
     },
   },
 };
@@ -68,15 +79,47 @@ body {
   background-color: #313131;
   color: #fff;
 }
+p {
+  margin: 0;
+}
 .content {
   &-body {
     &-item {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      &:hover {
+        .editor {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
       .close {
         margin-left: 20px;
         cursor: pointer;
+      }
+      .save {
+        cursor: pointer;
+        top: 2px;
+        right: 22px;
+        position: absolute;
+        z-index: 100;
+        background-color: #313131;
+      }
+      .editor {
+        position: absolute;
+        top: 2px;
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        right: 40px;
+        transition: 0.5s;
+        opacity: 0;
+        visibility: hidden;
+        img {
+          width: 100%;
+        }
       }
     }
   }
