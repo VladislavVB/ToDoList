@@ -12,6 +12,28 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: "CreateItem",
+  data() {
+    return {
+      listItemName: "",
+      ItemEdit: "",
+      listItems: [{ title: "text1", edit: false }],
+    };
+  },
+  methods: {
+    addItem() {
+      const newItem = {
+        title: this.listItemName,
+        edit: false,
+      };
+      this.listItems.push(newItem);
+      this.listItemName = "";
+    },
+  },
+}
+
+</script>
 
 <style lang="scss" scoped></style>

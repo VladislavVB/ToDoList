@@ -1,64 +1,43 @@
 <template>
   <div>
-    <div class="content-body">
-      <div v-for="item in listItems" :key="item" class="content-body-item">
-        <p v-if="item.edit === false">{{ item.title }}</p>
-        <div v-else>
-          <input type="text" v-model="item.title" /><span
-            class="save"
-            @click="editItem(item)"
-            >save</span
-          >
-        </div>
-        <div class="controls">
-          <span @click="item.edit = true" class="editor"
-            ><img src="@/assets/edit.png" alt=""
-          /></span>
-          <span @click="itemDelite(item)" class="close">✖</span>
-        </div>
-      </div>
-    </div>
-    <div class="content-add">
-      <input
-        @keydown.enter="addItem()"
-        v-model="listItemName"
-        type="text"
-        placeholder="text"
-      />
-      <button :class="listItemName != '' ? '' : 'deactive'" @click="addItem()">
-        Add
-      </button>
-    </div>
+    <List />
+    <CreateItem />
   </div>
 </template>
 
 <script>
+import List from "@/pages/toDoList/components/List";
+import CreateItem from "@/pages/toDoList/components/CreateItem";
 export default {
   name: "ToDoList",
-  data() {
-    return {
-      listItemName: "",
-      ItemEdit: "",
-      listItems: [{ title: "text1", edit: false }],
-    };
+  // data() {
+  //   return {
+  //     listItemName: "",
+  //     ItemEdit: "",
+  //     listItems: [{ title: "text1", edit: false }],
+  //   };
+  // },
+  components: {
+    List,
+    CreateItem,
   },
   methods: {
-    addItem() {
-      const newItem = {
-        title: this.listItemName,
-        edit: false,
-      };
-      this.listItems.push(newItem);
-      this.listItemName = "";
-    },
-    itemDelite(index) {
-      this.listItems = this.listItems.filter((item) => item != index);
-    },
-    editItem(elem) {
-      console.log(elem);
-      elem.edit = false;
-      this.ItemEdit = "";
-    },
+    // addItem() {
+    //   const newItem = {
+    //     title: this.listItemName,
+    //     edit: false,
+    //   };
+    //   this.listItems.push(newItem);
+    //   this.listItemName = "";
+    // },
+    // itemDelite(index) {
+    //   this.listItems = this.listItems.filter((item) => item != index);
+    // },
+    // editItem(elem) {
+    //   console.log(elem);
+    //   elem.edit = false;
+    //   this.ItemEdit = "";
+    // },
   },
 };
 </script>

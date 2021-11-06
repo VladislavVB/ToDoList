@@ -19,6 +19,26 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: "List",
+  data() {
+    return {
+      ItemEdit: "",
+      listItems: [{ title: "text1", edit: false }],
+    };
+  },
+  methods: {
+    itemDelite(index) {
+      this.listItems = this.listItems.filter((item) => item != index);
+    },
+    editItem(elem) {
+      console.log(elem);
+      elem.edit = false;
+      this.ItemEdit = "";
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped></style>
