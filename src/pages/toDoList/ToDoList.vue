@@ -1,43 +1,51 @@
 <template>
   <div>
-    <List />
-    <CreateItem />
+    <div class="content-body">
+      <ListItem
+        v-for="item in listItems"
+        :key="item"
+        class="content-body-item"
+        v-bind:todo_prop="item"
+      />
+    </div>
+    <AddItem />
   </div>
 </template>
 
 <script>
-import List from "@/pages/toDoList/components/List";
-import CreateItem from "@/pages/toDoList/components/CreateItem";
+import ListItem from "@/pages/toDoList/components/ListItem";
+import AddItem from "@/pages/toDoList/components/AddItem";
+
 export default {
   name: "ToDoList",
-  // data() {
-  //   return {
-  //     listItemName: "",
-  //     ItemEdit: "",
-  //     listItems: [{ title: "text1", edit: false }],
-  //   };
-  // },
+  data() {
+    return {
+      listItemName: "",
+      ItemEdit: "",
+      listItems: [{ title: "text1", edit: false }],
+    };
+  },
   components: {
-    List,
-    CreateItem,
+    ListItem,
+    AddItem,
   },
   methods: {
-    // addItem() {
-    //   const newItem = {
-    //     title: this.listItemName,
-    //     edit: false,
-    //   };
-    //   this.listItems.push(newItem);
-    //   this.listItemName = "";
-    // },
-    // itemDelite(index) {
-    //   this.listItems = this.listItems.filter((item) => item != index);
-    // },
-    // editItem(elem) {
-    //   console.log(elem);
-    //   elem.edit = false;
-    //   this.ItemEdit = "";
-    // },
+    addItem() {
+      const newItem = {
+        title: this.listItemName,
+        edit: false,
+      };
+      this.listItems.push(newItem);
+      this.listItemName = "";
+    },
+    itemDelite(index) {
+      this.listItems = this.listItems.filter((item) => item != index);
+    },
+    editItem(elem) {
+      console.log(elem);
+      elem.edit = false;
+      this.ItemEdit = "";
+    },
   },
 };
 </script>
@@ -64,6 +72,9 @@ p {
 }
 .content {
   &-body {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
     &-item {
       position: relative;
       display: flex;
